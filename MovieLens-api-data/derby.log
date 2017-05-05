@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Fri May 05 01:47:30 EDT 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-015b-d726-1ca9-00000b35a5d0 
+on database directory memory:/home/jo32/Documents/workspace-sts-3.8.4.RELEASE/MovieLens-api-data/testdb with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
+Loaded from file:/home/jo32/.m2/repository/org/apache/derby/derby/10.13.1.1/derby-10.13.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_121-b13
+user.dir=/home/jo32/Documents/workspace-sts-3.8.4.RELEASE/MovieLens-api-data
+os.name=Linux
+os.arch=amd64
+os.version=4.10.0-20-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
