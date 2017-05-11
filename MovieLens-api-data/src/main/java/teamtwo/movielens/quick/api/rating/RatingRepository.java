@@ -5,9 +5,8 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 //Make CRUD operations
-public interface RatingRepository extends CrudRepository<Rating, String>{
+public interface RatingRepository extends CrudRepository<Rating, Integer>{
 	
-	public List<Rating> findByName(String name);
-	public List<Rating> findByDescription(String desc);
+	public List<Rating> findByMovieId(int movieId);
 
 }

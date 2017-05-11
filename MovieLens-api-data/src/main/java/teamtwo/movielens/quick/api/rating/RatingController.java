@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import teamtwo.movielens.quick.api.movies.Movie;
 
 
-//controller class
+/**
+ * @author jo32
+ * Rating Controller class
+ */
 @RestController
 public class RatingController {
 	
@@ -21,31 +24,32 @@ public class RatingController {
 	private RatingService RatingService;
 	
 	
-	@RequestMapping("/movies/{id}/ratings")
-	public List<Rating> GetAllRatings(@PathVariable String id){
-		return RatingService.GetAllRatings(id);
+	@RequestMapping("/movies/{movieId}/ratings")
+	public List<Rating> GetAllRatings(@PathVariable int movieId){
+		return RatingService.GetAllRatings(movieId);
 	}
-	//create variable portion {#}
 	@RequestMapping("/movies/{movieId}/ratings/{id}")
-	public Rating GetRating(@PathVariable String id){
+	public Rating GetRating(@PathVariable int id){
 		return RatingService.GetRating(id);
 	}
 	
-	//map this method to any request that is a post to "ratings"
 	@RequestMapping(method=RequestMethod.POST, value="/movies/{movieId}/ratings")
-	public void addRating(@RequestBody Rating rating, @PathVariable String movieId){
-		rating.setMovie(new Movie(movieId,"",""));
+	public void addRating(@RequestBody Rating rating, 
+			@PathVariable int movieId)
+	{
 		RatingService.addRating(rating);
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, value="/movies/{movieId}/ratings/{id}")
-	public void updateRating(@RequestBody Rating rating, @PathVariable String movieId, @PathVariable String id){
-		rating.setMovie(new Movie(movieId,"",""));
+	@RequestMapping(method=RequestMethod.PUT, value="/movies/{movieId}/ratings")
+	public void updateRating(@RequestBody Rating rating,
+			@PathVariable int movieId, @PathVariable int id)
+	{
 		RatingService.updateRating(rating);
 	}
 	
-	@RequestMapping(method=RequestMethod.DELETE, value="/movies/{movieId}/ratings/{id}")
-	public void deleteRating(@PathVariable String id){
+	@RequestMapping(method=RequestMethod.DELETE, value="/movies/{movieId}/ratings")
+	public void deleteRating(@PathVariable int id)
+	{
 		 RatingService.deleteRating(id);
 	}
 

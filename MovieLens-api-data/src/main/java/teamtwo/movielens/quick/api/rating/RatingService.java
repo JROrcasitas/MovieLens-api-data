@@ -17,14 +17,14 @@ public class RatingService {
 	//create mutable list
 	//use JPA to connect to database
 	
-	public List<Rating> GetAllRatings(String id){
+	public List<Rating> GetAllRatings(int id){
 		//return topics;
-		List<Rating> topics = new ArrayList<>();
-		mrepo.findAll().forEach(topics::add);
-		return topics;
+		List<Rating> rating = new ArrayList<>();
+		mrepo.findByMovieId(id).forEach(rating::add);
+		return rating;
 	}
 	
-	public Rating GetRating(String id){
+	public Rating GetRating(int id){
 		//return topics.stream().filter(t -> t.getId().equals(id)).findFirst().get();
 		return mrepo.findOne(id);
 	}
@@ -35,17 +35,10 @@ public class RatingService {
 	}
 	
 	public void updateRating(Rating rating){
-		/*for(int i=0;i<topics.size(); i++){
-			Topic t = topics.get(i);
-			if(t.getId().equals(id)){
-				topics.set(i, topic);
-				return;
-			}
-		}*/
 		mrepo.save(rating);
 	}
 	
-	public void deleteRating(String id){
+	public void deleteRating(int id){
 		//topics.removeIf(t -> t.getId().equals(id));
 		mrepo.delete(id);
 	}

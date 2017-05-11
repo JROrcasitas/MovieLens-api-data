@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 
-//controller class
+/**
+ * @author jo32
+ * Movie Controller class 
+ */
 @RestController
 public class MovieController {
 	
@@ -23,13 +26,11 @@ public class MovieController {
 	public List<Movie> GetAllMovies(){
 		return topicService.GetAllMovies();
 	}
-	//create variable portion {#}
 	@RequestMapping("/movies/{id}")
-	public Movie GetMovie(@PathVariable String id){
+	public Movie GetMovie(@PathVariable int id){
 		return topicService.GetMovie(id);
 	}
 	
-	//map this method to any request that is a post to "topics"
 	@RequestMapping(method=RequestMethod.POST, value="/movies")
 	public void addMovie(@RequestBody Movie topic){
 		topicService.addMovie(topic);
@@ -41,7 +42,7 @@ public class MovieController {
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/movies/{id}")
-	public void deleteMovie(@PathVariable String id){
+	public void deleteMovie(@PathVariable int id){
 		 topicService.deleteMovie(id);
 	}
 
