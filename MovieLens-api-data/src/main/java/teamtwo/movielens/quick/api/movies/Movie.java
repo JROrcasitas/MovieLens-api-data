@@ -1,9 +1,11 @@
 package teamtwo.movielens.quick.api.movies;
 
-import java.util.ArrayList;
-import java.util.Set;
+
+import java.util.HashSet;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,7 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
 import teamtwo.movielens.quick.api.genres.Genre;
 
 /**
@@ -19,43 +20,49 @@ import teamtwo.movielens.quick.api.genres.Genre;
  *Model Class that will be used in JPA
  */
 @Entity
-@Table(name = "movies")
+@Table(name = "movies", schema = "moviedb")
 public class Movie {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@Column(name="title")
 	private String title;
+	@Column(name="release_date")
 	private String release_date;
-	
-	
-	private Set<Genre> genres;
-	
+	private HashSet<Genre> genres;
 	public Movie(String title, 
 			String release, 
-			Set<Genre> genres) {
+			HashSet<Genre> genres) {
 		this.title = title;
 		this.release_date = release;
-		this.genres = genres;
-	}
-	
-	@ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "genres_movies", 
-    joinColumns = @JoinColumn(name = "movie_id", 
-    referencedColumnName = "id"), 
-    inverseJoinColumns = @JoinColumn(name = "genre_id", 
-    referencedColumnName = "id"))
-	public Set<Genre> getGenres() {
-		return genres;
-	}
-
-	public void setGenres(Set<Genre> genres) {
 		this.genres = genres;
 	}
 	
 	public Movie() {
 
 	}
+	
+	public String getRelease_date() {
+		return release_date;
+	}
+
+	public void setRelease_date(String release_date) {
+		this.release_date = release_date;
+	}
+	@ManyToMany(fetch = FetchType.LAZY,targetEntity=Genre.class, cascade = CascadeType.ALL)
+    @JoinTable(name = "genres_movies", schema = "moviedb")
+    //joinColumns = @JoinColumn(name = "movie_id", referencedColumnName="id"),
+    //inverseJoinColumns = @JoinColumn(name = "genre_id", referencedColumnName="id"))
+	public HashSet<Genre> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(HashSet<Genre> genres) {
+		this.genres = genres;
+	}
+
 	
 	public int getId() {
 		return id;
@@ -71,14 +78,6 @@ public class Movie {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public String getRelease() {
-		return release_date;
-	}
-
-	public void setRelease(String release) {
-		this.release_date = release;
 	}
 
 	

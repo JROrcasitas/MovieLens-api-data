@@ -6,8 +6,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-//Business Service (Typically Singletons) indicated by @Service
 /**
  * @author jo32
  *Business Service (Typically Singletons) indicated by @Service
